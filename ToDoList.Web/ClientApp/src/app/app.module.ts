@@ -7,7 +7,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { AtlasComponent } from './atlas/atlas/atlas.component';
+import { AtlasComponent } from './atlas/atlas.component';
 
 @NgModule({
   declarations: [
