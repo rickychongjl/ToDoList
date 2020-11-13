@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-atlas',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./atlas.component.css']
 })
 export class AtlasComponent implements OnInit {
+  public auth: AuthService;
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit() {
+    
   }
-
+ 
 }

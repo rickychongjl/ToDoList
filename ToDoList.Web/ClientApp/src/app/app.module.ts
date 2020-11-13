@@ -22,6 +22,7 @@ import { AtlasComponent } from './atlas/atlas.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'atlas', component: AtlasComponent}
     ]),
     AuthModule.forRoot({
       domain: 'dev-ui031igo.au.auth0.com',
