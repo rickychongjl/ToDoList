@@ -26,6 +26,7 @@ namespace ToDoList.Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +71,10 @@ namespace ToDoList.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
         }
     }
 }
