@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ToDoList.Web.Helpers;
+using ToDoList.Web.Service;
 
 namespace ToDoList.Web
 {
@@ -20,7 +22,9 @@ namespace ToDoList.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserService, UserService>();
             services.AddControllersWithViews();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -71,6 +75,7 @@ namespace ToDoList.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+            //app.UseMiddleware<JwtMiddleware>();
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()

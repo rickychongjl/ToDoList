@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { UserItem } from 'src/app/login/user-item.model';
+import { LoginCredentials } from './login-credentials.model';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,10 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
 
-  public result: string;
+  public username: string;
+  public password: string;
+  public model: LoginCredentials = new LoginCredentials();
+  public results: UserItem = new UserItem();
 
   constructor(private http: HttpClient) {  }
  
@@ -18,9 +23,8 @@ export class LoginComponent implements OnInit {
   }
 
   public getContent() {
-    this.http.get<any>('api/home/atlas').subscribe(data => {
-      this.result = data;
+    return this.http.post<UserItem>('api/home/user', this.model).subscribe(data => {
+      this.results = data;
     });
-    
   }
 }

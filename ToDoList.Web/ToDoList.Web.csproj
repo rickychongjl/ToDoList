@@ -17,6 +17,7 @@
     <PackageReference Include="MongoDB.Bson" Version="2.11.4" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.11.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,10 +31,6 @@
     <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\contentFiles\any\netstandard2.0\Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\contentFiles\any\netstandard2.0\Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\contentFiles\any\netstandard2.0\Core\Compression\Zstandard\lib\win\libzstd.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Entities\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
@@ -63,5 +60,21 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\build\../runtimes/win/native/libzstd.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\build\../runtimes/win/native/snappy32.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\build\../runtimes/win/native/snappy64.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\build\../runtimes/win/native/snappy32.dll" />
+  </ItemGroup>
 
 </Project>

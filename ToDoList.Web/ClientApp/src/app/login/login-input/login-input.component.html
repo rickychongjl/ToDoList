@@ -1,0 +1,17 @@
+<div class="row">
+  <label>
+    <strong>Username:</strong>
+    <input type="text" placeholder="Please enter username" [(ngModel)]="model.username" required />
+  </label>
+</div>
+
+<div class="row">
+  <label>
+    <strong>Password:</strong>
+    <input type="password" placeholder="Please enter password" [(ngModel)]="model.password" required />
+  </label>
+</div>
+<div class="row align-middle"><button type="button" class="btn-default" (click)="getContent()">Login</button></div>
+<div *ngFor="let result of results">
+  <p>{{result.userName}}</p>
+</div>

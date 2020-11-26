@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using ToDoList.Web.Entities;
+using ToDoList.Web.Models;
+using ToDoList.Web.Service;
 
 namespace ToDoList.Web.Controllers
 {
@@ -14,16 +17,21 @@ namespace ToDoList.Web.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        [HttpGet("atlas")]
-        public List<BsonDocument> Get()
+        private readonly IUserService _userService;
+        public HomeController(IUserService userService)
         {
+            _userService = userService;
+        }
 
-            var client = new MongoClient("mongodb+srv://test-user:warcraft5688@cluster0.6sjg7.mongodb.net/sample_airbnb?retryWrites=true&w=majority");
-            var database = client.GetDatabase("sample_airbnb");
-            var collection = database.GetCollection<BsonDocument>("listingsAndReviews");
-            var filter = Builders<BsonDocument>.Filter.Empty;
-            var result = collection.Find(filter).ToList();
-             return result;
+        [HttpPost("user")]
+        public async Task<ActionResult> Authenticate([FromBody]AuthenticateRequest model)
+        {
+            var response =  await _userService.Authenticate(model);
+
+            if (response == null)
+                return BadRequest(new { message = "Username or Password is incorrect" });
+
+            return Ok(response);
         }
     }
 }
