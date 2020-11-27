@@ -34,7 +34,7 @@ namespace ToDoList.Web
             services.AddSingleton<IToDoListDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<ToDoListDatabaseSettings>>().Value);
 
-            services.AddSingleton<UserData>
+            services.AddSingleton<DatabaseService>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

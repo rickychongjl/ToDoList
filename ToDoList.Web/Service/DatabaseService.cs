@@ -11,7 +11,7 @@ namespace ToDoList.Web.Service
         Task<List<User>> GetUserCredentials();
     }
 
-    public class DatabaseService: IDatabaseService
+    public class DatabaseService
     {
         private readonly IMongoCollection<User> _users;
 

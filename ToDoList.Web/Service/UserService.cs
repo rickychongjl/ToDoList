@@ -21,7 +21,7 @@ namespace ToDoList.Web.Service
     public class UserService: IUserService
     {
         private List<User> _users;
-        private DatabaseService _databaseService;
+        private readonly DatabaseService _databaseService;
         private readonly AppSettings _appSettings;
         public UserService (IOptions<AppSettings> appSettings, DatabaseService databaseService)
         {
@@ -53,7 +53,7 @@ namespace ToDoList.Web.Service
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128Encryption)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
