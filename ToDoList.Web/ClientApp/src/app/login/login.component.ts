@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { UserItem } from 'src/app/login/user-item.model';
-import { LoginCredentials } from './login-credentials.model';
+import { UserItem } from 'src/app/login/models/user-item.model';
+import { LoginCredentials } from 'src/app/login/models/login-credentials.model';
 
 @Component({
   selector: 'app-login',

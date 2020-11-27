@@ -7,7 +7,6 @@ using ToDoList.Web.Helpers;
 using ToDoList.Web.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoDB.Bson;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -22,20 +21,18 @@ namespace ToDoList.Web.Service
     public class UserService: IUserService
     {
         private List<User> _users;
+        private DatabaseService _databaseService;
         private readonly AppSettings _appSettings;
-        public UserService (IOptions<AppSettings> appSettings)
+        public UserService (IOptions<AppSettings> appSettings, DatabaseService databaseService)
         {
             _appSettings = appSettings.Value;
+            _databaseService = databaseService;
         }
 
         private async Task<List<User>> GetUserCredentials()
         {
-            var client = new MongoClient("mongodb+srv://test-user:warcraft5688@cluster0.6sjg7.mongodb.net/ToDoList?retryWrites=true&w=majority");
-            var collection = await client
-                .GetDatabase("ToDoList")
-                .GetCollection<User>("user_credentials")
-                .Find(Builders<User>.Filter.Empty).ToListAsync();
-            return collection;
+
+            return await _databaseService.GetUserCredentials();
         }
         public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
         {
@@ -56,7 +53,7 @@ namespace ToDoList.Web.Service
             {
                 Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.Aes128Encryption)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);

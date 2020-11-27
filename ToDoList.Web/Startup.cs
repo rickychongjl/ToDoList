@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using ToDoList.Web.Helpers;
+using ToDoList.Web.Models;
 using ToDoList.Web.Service;
 
 namespace ToDoList.Web
@@ -25,6 +27,14 @@ namespace ToDoList.Web
             services.AddScoped<IUserService, UserService>();
             services.AddControllersWithViews();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            services.Configure<ToDoListDatabaseSettings>(
+                Configuration.GetSection("ToDoListDatabaseSettings"));
+
+            services.AddSingleton<IToDoListDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<ToDoListDatabaseSettings>>().Value);
+
+            services.AddSingleton<UserData>
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
