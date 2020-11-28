@@ -9,9 +9,6 @@ import { LoginCredentials } from 'src/app/login/models/login-credentials.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  public username: string;
-  public password: string;
   public model: LoginCredentials = new LoginCredentials();
   public results: UserItem = new UserItem();
 
@@ -21,8 +18,8 @@ export class LoginComponent implements OnInit {
   }
 
   public getContent() {
-    return this.http.post<UserItem>('api/home/user', this.model).subscribe(data => {
-      this.results = data;
+    return this.http.post<UserItem>('api/home/user', this.model).subscribe(result => {
+      this.results = result;
     });
   }
 }

@@ -22,9 +22,6 @@ namespace ToDoList.Web.Controllers
         {
             var response =  await _userService.Authenticate(model);
 
-            if (response == null)
-                return BadRequest(new { message = "Username or Password is incorrect" });
-
             return Ok(response);
         }
     }

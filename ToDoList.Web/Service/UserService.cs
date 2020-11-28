@@ -39,10 +39,10 @@ namespace ToDoList.Web.Service
              _users = await GetUserCredentials();
             var user =  _users.SingleOrDefault(user => string.Equals(user.Username, model.Username) && string.Equals(user.Password, model.Password));
 
-            if (user == null) return null;
+            if (user == null) return new AuthenticateResponse("Username or password was incorrect, please try again", false);
 
             var token = GenerateJwtToken(user);
-            return new AuthenticateResponse(user, token);
+            return new AuthenticateResponse(user, token, $"Welcome back, {user.Username}", true);
         }
         private string GenerateJwtToken(User user)
         {
