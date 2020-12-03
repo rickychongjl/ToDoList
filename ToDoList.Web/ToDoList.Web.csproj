@@ -77,4 +77,8 @@
     <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\build\../runtimes/win/native/snappy32.dll" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\user-message\" />
+  </ItemGroup>
+
 </Project>

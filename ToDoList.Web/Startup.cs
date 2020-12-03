@@ -9,6 +9,7 @@ using MongoDB.Driver;
 using ToDoList.Web.Helpers;
 using ToDoList.Web.Models;
 using ToDoList.Web.Service;
+using WebApi.Helpers;
 
 namespace ToDoList.Web
 {
@@ -85,11 +86,13 @@ namespace ToDoList.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-            //app.UseMiddleware<JwtMiddleware>();
+
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
+            app.UseMiddleware<JwtMiddleware>();
         }
     }
 }
