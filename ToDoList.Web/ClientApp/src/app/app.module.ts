@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserMessageComponent } from './user-message/user-message.component';
+import { TokenInterceptor } from './auth/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { UserMessageComponent } from './user-message/user-message.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

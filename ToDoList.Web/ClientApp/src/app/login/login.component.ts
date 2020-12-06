@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   public getContent() {
     return this.http.post<UserItem>('api/home/user', this.model).subscribe(result => {
       this.results = result;
+      localStorage.setItem('id_token', this.results.token);
     });
   }
 }

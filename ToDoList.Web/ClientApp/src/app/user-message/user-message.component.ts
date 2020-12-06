@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserItem } from 'src/app/login/models/user-item.model';
 
 @Component({
   selector: 'app-user-message',
@@ -7,13 +8,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user-message.component.css']
 })
 export class UserMessageComponent implements OnInit {
-  public results: string = "";
+  public results: UserItem;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    return this.http.get<any>('api/home/', { headers: {Authorization: Bearer } }).subscribe(result => {
+  }
+
+  public onClick() {
+    return this.http.get<UserItem>('api/home').subscribe(result => {
       this.results = result;
     });
   }
-
 }

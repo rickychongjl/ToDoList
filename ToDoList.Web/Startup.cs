@@ -5,11 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 using ToDoList.Web.Helpers;
 using ToDoList.Web.Models;
 using ToDoList.Web.Service;
-using WebApi.Helpers;
 
 namespace ToDoList.Web
 {
@@ -91,8 +89,6 @@ namespace ToDoList.Web
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
-
-            app.UseMiddleware<JwtMiddleware>();
         }
     }
 }

@@ -1,3 +1,4 @@
 export class UserItem {
-  public ResponseMessage: string;
+  public responseMessage: string;
+  public token: string;
 }

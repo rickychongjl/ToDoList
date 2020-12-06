@@ -17,7 +17,7 @@ namespace ToDoList.Web.Service
     public interface IUserService
     {
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
-        string GetTest();
+        AuthenticateResponse GetTest();
     }
     public class UserService: IUserService
     {
@@ -45,9 +45,9 @@ namespace ToDoList.Web.Service
             var token = GenerateJwtToken(user);
             return new AuthenticateResponse(user, token, $"Welcome back, {user.Username}", true);
         }
-        public string GetTest()
+        public AuthenticateResponse GetTest()
         {
-            return "You are authenticated to get the test";
+            return new AuthenticateResponse("Well Hello there", false);
         }
         private string GenerateJwtToken(User user)
         {

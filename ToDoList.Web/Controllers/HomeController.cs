@@ -23,13 +23,13 @@ namespace ToDoList.Web.Controllers
         {
             var response = await _userService.Authenticate(model);
 
-            return Ok(response);
+            return Ok(response); 
         }
-        [Authorize]
+        //[Authorize]
         [HttpGet]
-        public IActionResult GetTest()
+        public ActionResult GetTest()
         {
-            var response =  _userService.GetTest();
+            var response = _userService.GetTest();
 
             return Ok(response);
         }
