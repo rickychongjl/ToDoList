@@ -25,7 +25,7 @@ namespace ToDoList.Web.Controllers
 
             return Ok(response); 
         }
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public ActionResult GetTest()
         {

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.Options;
 using ToDoList.Web.Helpers;
 using ToDoList.Web.Models;
 using ToDoList.Web.Service;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ToDoList.Web
 {
@@ -26,7 +29,8 @@ namespace ToDoList.Web
             services.AddScoped<IUserService, UserService>();
             services.AddControllersWithViews();
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
+            var appSettings = Configuration.GetSection(nameof(AppSettings));
+            
             services.Configure<ToDoListDatabaseSettings>(
                 Configuration.GetSection("ToDoListDatabaseSettings"));
 
@@ -34,6 +38,18 @@ namespace ToDoList.Web
                 sp.GetRequiredService<IOptions<ToDoListDatabaseSettings>>().Value);
 
             services.AddSingleton<DatabaseService>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appSettings[nameof(AppSettings.Secret)])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -64,6 +80,12 @@ namespace ToDoList.Web
             }
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
@@ -84,11 +106,6 @@ namespace ToDoList.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
         }
     }
 }
