@@ -7,8 +7,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UserMessageComponent } from './user-message/user-message.component';
-import { TokenInterceptor } from './auth/token-interceptor';
+import { TokenInterceptor } from './services/interceptor/token-interceptor';
+import { AuthGuard } from './services/auth/auth-guard.service';
+//import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,6 @@ import { TokenInterceptor } from './auth/token-interceptor';
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    UserMessageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,7 +25,7 @@ import { TokenInterceptor } from './auth/token-interceptor';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -82,8 +82,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\auth\" />
-    <Folder Include="ClientApp\src\app\user-message\models\" />
+    <Folder Include="ClientApp\src\app\services\auth\" />
   </ItemGroup>
 
 </Project>
