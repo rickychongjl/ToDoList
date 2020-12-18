@@ -10,10 +10,14 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <StartupObject></StartupObject>
+    <UserSecretsId>d95988ff-7cd9-4ed8-a0a5-54abc6a80acd</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.8" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.11.4" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.11.4" />
@@ -75,6 +79,10 @@
 
   <ItemGroup>
     <Content Remove="C:\Users\Ricky\.nuget\packages\mongodb.driver.core\2.11.4\build\../runtimes/win/native/snappy32.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\services\auth\" />
   </ItemGroup>
 
 </Project>

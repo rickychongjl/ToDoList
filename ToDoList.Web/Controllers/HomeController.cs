@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Web.Models;
 using ToDoList.Web.Service;
@@ -18,12 +19,17 @@ namespace ToDoList.Web.Controllers
         }
 
         [HttpPost("user")]
-        public async Task<ActionResult> Authenticate([FromBody]AuthenticateRequest model)
+        public async Task<ActionResult> Authenticate([FromBody] AuthenticateRequest model)
         {
-            var response =  await _userService.Authenticate(model);
+            var response = await _userService.Authenticate(model);
 
-            if (response == null)
-                return BadRequest(new { message = "Username or Password is incorrect" });
+            return Ok(response); 
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult GetTest()
+        {
+            var response = _userService.GetTest();
 
             return Ok(response);
         }

@@ -17,6 +17,7 @@ namespace ToDoList.Web.Service
     public interface IUserService
     {
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
+        AuthenticateResponse GetTest();
     }
     public class UserService: IUserService
     {
@@ -39,24 +40,39 @@ namespace ToDoList.Web.Service
              _users = await GetUserCredentials();
             var user =  _users.SingleOrDefault(user => string.Equals(user.Username, model.Username) && string.Equals(user.Password, model.Password));
 
-            if (user == null) return null;
+            if (user == null) return new AuthenticateResponse("Username or password was incorrect, please try again", false);
 
             var token = GenerateJwtToken(user);
-            return new AuthenticateResponse(user, token);
+            return new AuthenticateResponse(user, token, $"Welcome back, {user.Username}", true);
+        }
+        public AuthenticateResponse GetTest()
+        {
+            return new AuthenticateResponse("Well Hello there", false);
         }
         private string GenerateJwtToken(User user)
         {
-            // generate token that is valid for 7 days
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            List<Claim> claims = new List<Claim>
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.Username)
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_appSettings.Secret));
+            SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor { Subject = new ClaimsIdentity(claims), Expires = DateTime.Now.AddHours(1), SigningCredentials = credentials };
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+            //// generate token that is valid for 7 days
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
+            //    Expires = DateTime.UtcNow.AddDays(1),
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            //};
+            //var token = tokenHandler.CreateToken(tokenDescriptor);
+            //return tokenHandler.WriteToken(token);
         }
     }
 }
