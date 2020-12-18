@@ -6,7 +6,7 @@ import { AuthService } from '../auth/auth-service.service';
   providedIn: 'root'
 })
 export class UserService {
-  public authNavStatusSource = new Subject<boolean>();
+  public authNavStatusSource = new BehaviorSubject<boolean>(true);
   authNavStatus$ = this.authNavStatusSource.asObservable();
 
   constructor(private authService: AuthService) {
