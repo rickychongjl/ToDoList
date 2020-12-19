@@ -17,8 +17,18 @@ namespace ToDoList.Web.Entities
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Username { get; set; }
-        
+        public string Email { get; set; }
         [JsonIgnore]
         public string Password { get; set; }
+
+        public User(string firstName, string lastName, string username, string email, string password)
+        {
+            Firstname = firstName;
+            Lastname = lastName;
+            Username = username;
+            Email = email;
+            Password = password;
+            UserId = string.Empty;
+        }
     }
 }

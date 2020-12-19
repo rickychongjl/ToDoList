@@ -18,6 +18,7 @@ namespace ToDoList.Web.Service
     {
         Task<AuthenticateResponse> Authenticate(AuthenticateRequest model);
         AuthenticateResponse GetTest();
+        Task<bool> Register(RegisterRequest model);
     }
     public class UserService: IUserService
     {
@@ -45,10 +46,21 @@ namespace ToDoList.Web.Service
             var token = GenerateJwtToken(user);
             return new AuthenticateResponse(user, token, $"Welcome back, {user.Username}", true);
         }
+
         public AuthenticateResponse GetTest()
         {
             return new AuthenticateResponse("Well Hello there", false);
         }
+
+        public async Task<bool> Register(RegisterRequest model)
+        {
+            var result = await _databaseService.CreateUser(model);
+            if (result)
+                return true;
+
+            return false;
+        }
+
         private string GenerateJwtToken(User user)
         {
             List<Claim> claims = new List<Claim>
@@ -62,17 +74,6 @@ namespace ToDoList.Web.Service
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
-            //// generate token that is valid for 7 days
-            //var tokenHandler = new JwtSecurityTokenHandler();
-            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            //var tokenDescriptor = new SecurityTokenDescriptor
-            //{
-            //    Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-            //    Expires = DateTime.UtcNow.AddDays(1),
-            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            //};
-            //var token = tokenHandler.CreateToken(tokenDescriptor);
-            //return tokenHandler.WriteToken(token);
         }
     }
 }

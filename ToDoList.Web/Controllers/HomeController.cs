@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Web.Models;
@@ -18,12 +16,19 @@ namespace ToDoList.Web.Controllers
             _userService = userService;
         }
 
-        [HttpPost("user")]
+        [HttpPost("login")]
         public async Task<ActionResult> Authenticate([FromBody] AuthenticateRequest model)
         {
             var response = await _userService.Authenticate(model);
 
-            return Ok(response); 
+            return Ok(response);
+        }
+
+        [HttpPost("sign-up")]
+        public async Task<ActionResult> Register([FromBody] RegisterRequest model)
+        {
+            var response = await _userService.Register(model);
+            return Ok(response);
         }
         [Authorize]
         [HttpGet]
