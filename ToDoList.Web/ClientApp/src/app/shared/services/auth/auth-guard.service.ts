@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth-service.service';
+import { AuthService } from 'src/app/shared/services/auth/auth-service.service';
 import { Router, CanActivate } from '@angular/router';
 import { UserService } from '../user-services/user-service.service';
  
@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate{
       this.userService.authNavStatusSource.next(false);
       return false;
     }
+    //this.router.navigate(['home']);
     this.userService.authNavStatusSource.next(true);
     return true;
   }

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <label>
+      <strong>First Name:</strong>
+      <input type="text" placeholder="Please enter first name" [(ngModel)]="user.details.firstName" required />
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <strong>Last Name:</strong>
+      <input type="text" placeholder="Please enter last name" [(ngModel)]="user.details.lastName" required />
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <strong>Username:</strong>
+      <input type="text" placeholder="Please enter username" [(ngModel)]="user.details.userName" required />
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <strong>Email:</strong>
+      <input type="email" placeholder="Please enter email" [(ngModel)]="user.details.email" required />
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <strong>Password:</strong>
+      <input type="password" placeholder="Please enter password" [(ngModel)]="user.details.password" required />
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <strong>Confirm password:</strong>
+      <input type="password" placeholder="Please confirm password" [(ngModel)]="user.confirmPassword" required />
+    </label>
+  </div>
+  <div class="row align-middle"><button type="button" class="btn-default" (click)="signUp()">Sign Up</button></div>
+
+  <!--<p>{{results.responseMessage}}</p>-->
+
+
+</div>

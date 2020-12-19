@@ -82,7 +82,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\services\auth\" />
+    <Folder Include="ClientApp\src\app\sign-up\models\" />
   </ItemGroup>
 
 </Project>
