@@ -26,8 +26,12 @@ export class LoginComponent implements OnInit {
   public login() {
     return this.http.post<AuthResponse>('api/home/login', this.model).subscribe(result => {
       this.results = result;
-      localStorage.setItem('id_token', this.results.token);
-      this.userService.authNavStatusSource.next(true);
+      if (this.results.isAuthentic){
+        localStorage.setItem('id_token', this.results.token);
+        this.userService.authNavStatusSource.next(true);
+        this.router.navigate(['home']);
+      }
+      this.model = new LoginCredentials();
     });
   }
 }
