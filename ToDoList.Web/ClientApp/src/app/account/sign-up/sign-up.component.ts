@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/auth/auth-service.service';
+import { AuthService } from '../../shared/services/auth/auth-service.service';
 import { Router } from '@angular/router';
 import { SignUpDetails } from './models/sign-up-details.model';
 import { HttpClient } from '@angular/common/http';

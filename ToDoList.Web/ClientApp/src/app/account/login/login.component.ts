@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthResponse } from 'src/app/login/models/auth-response.model';
-import { LoginCredentials } from 'src/app/login/models/login-credentials.model';
-import { UserService } from '../shared/services/user-services/user-service.service';
-import { AuthService } from '../shared/services/auth/auth-service.service';
+import { AuthResponse } from 'src/app/account/login/models/auth-response.model';
+import { LoginCredentials } from 'src/app/account/login/models/login-credentials.model';
+import { UserService } from '../../shared/services/user-services/user-service.service';
+import { AuthService } from '../../shared/services/auth/auth-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,8 +26,12 @@ export class LoginComponent implements OnInit {
   public login() {
     return this.http.post<AuthResponse>('api/home/login', this.model).subscribe(result => {
       this.results = result;
-      localStorage.setItem('id_token', this.results.token);
-      this.userService.authNavStatusSource.next(true);
+      if (this.results.isAuthentic){
+        localStorage.setItem('id_token', this.results.token);
+        this.userService.authNavStatusSource.next(true);
+        this.router.navigate(['home']);
+      }
+      this.model = new LoginCredentials();
     });
   }
 }

@@ -4,21 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TokenInterceptor } from './shared/services/interceptor/token-interceptor';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
-import { SignUpComponent } from './sign-up/sign-up.component';
-//import { JwtHelperService } from '@auth0/angular-jwt';
+import { AccountModule } from './account/account.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    LoginComponent,
-    SignUpComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,6 +21,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    AccountModule,
+    DashboardModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent]
