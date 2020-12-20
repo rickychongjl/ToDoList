@@ -1,48 +1,63 @@
 <div class="container">
-  <div class="row">
-    <label>
-      <strong>First Name:</strong>
-      <input type="text" placeholder="Please enter first name" [(ngModel)]="user.details.firstName" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2">
+      <label for="firstName">
+        <strong>First Name:</strong>
+      </label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="firstName" type="text" class="form-control" placeholder="Please enter first name" [(ngModel)]="user.details.firstName" required />
+    </div>
   </div>
 
-  <div class="row">
-    <label>
-      <strong>Last Name:</strong>
-      <input type="text" placeholder="Please enter last name" [(ngModel)]="user.details.lastName" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2">
+      <label for="lastName"><strong>Last Name:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="lastName" type="text" class="form-control" placeholder="Please enter last name" [(ngModel)]="user.details.lastName" required />
+    </div>
   </div>
 
-  <div class="row">
-    <label>
-      <strong>Username:</strong>
-      <input type="text" placeholder="Please enter username" [(ngModel)]="user.details.userName" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2">
+      <label for="username"><strong>Username:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="username" type="text" class="form-control" placeholder="Please enter username" [(ngModel)]="user.details.userName" required />
+    </div>
   </div>
 
-  <div class="row">
-    <label>
-      <strong>Email:</strong>
-      <input type="email" placeholder="Please enter email" [(ngModel)]="user.details.email" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2">
+      <label for="email"><strong>Email:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="email" type="email" class="form-control" placeholder="Please enter email" [(ngModel)]="user.details.email" required />
+    </div>
   </div>
 
-  <div class="row">
-    <label>
-      <strong>Password:</strong>
-      <input type="password" placeholder="Please enter password" [(ngModel)]="user.details.password" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2">
+      <label for="password"><strong>Password:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="password" type="password" class="form-control" placeholder="Please enter password" [(ngModel)]="user.details.password" required />
+    </div>
   </div>
 
-  <div class="row">
-    <label>
-      <strong>Confirm password:</strong>
-      <input type="password" placeholder="Please confirm password" [(ngModel)]="user.confirmPassword" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2">
+      <label for="confirmPasswrod"><strong>Confirm Password:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="confirmPasswrod" type="password" class="form-control" placeholder="Please confirm  password" [(ngModel)]="user.confirmPassword"
+        required />
+    </div>
   </div>
-  <div class="row align-middle"><button type="button" class="btn-default" (click)="signUp()">Sign Up</button></div>
-
-  <!--<p>{{results.responseMessage}}</p>-->
-
-
+  <div class="row justify-content-lg-center">
+    <div class="col-6">
+      <button type="button" class="btn btn-primary float-lg-right float-lg-left" (click)="signUp()">Sign Up</button>
+    </div>
+  </div>
 </div>

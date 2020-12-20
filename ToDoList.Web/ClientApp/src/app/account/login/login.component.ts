@@ -18,8 +18,14 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private userService: UserService, private authService: AuthService, private router: Router) {  }
  
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
+    //Special case where we call isAuthenticated not through canActivate, hence we need to broadcast authNavStatus state
+    var result = this.authService.isAuthenticated();
+    if (result) {
       this.router.navigate(['home']);
+      this.userService.authNavStatusSource.next(true);
+    }else{
+      this.router.navigate(['/account/login']);
+      this.userService.authNavStatusSource.next(false);
     }
   }
 

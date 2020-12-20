@@ -1,20 +1,28 @@
 <div class="container">
-  <div class="row">
-    <label>
-      <strong>Username:</strong>
-      <input type="text" placeholder="Please enter username" [(ngModel)]="model.username" required />
-    </label>
+  <div class="row form-group justify-content-center">
+    <div class="col-12 col-lg-2 text-lg-center my-auto">
+      <label for="username"><strong>Username:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="username" type="text" class="form-control" placeholder="Please enter username" [(ngModel)]="model.username" required />
+    </div>
   </div>
-
-  <div class="row">
-    <label>
-      <strong>Password:</strong>
-      <input type="password" placeholder="Please enter password" [(ngModel)]="model.password" required />
-    </label>
+  <div class="row form-group mt-3 justify-content-center">
+    <div class="col-12 col-lg-2 text-lg-center my-auto">
+      <label for="password"><strong>Password:</strong></label>
+    </div>
+    <div class="col-12 col-lg-4">
+      <input id="password" type="password" class="form-control" placeholder="Please enter password" [(ngModel)]="model.password" required />
+    </div>
   </div>
-  <div class="row align-middle"><button type="button" class="btn-default" (click)="login()">Login</button></div>
-
-    <p>{{results.responseMessage}}</p>
-
-
+  <div class="row mt-1 justify-content-lg-center">
+    <div class="col-12 col-lg-6 my-auto">
+      <button type="button" class="btn btn-primary float-lg-right float-left" (click)="login()">Login</button>
+    </div>
+  </div>
+  <div *ngIf="!results.isAuthentic">
+    <div class="row justify-content-lg-center">
+      <small class="text-danger">{{results.responseMessage}}</small>
+    </div>
+  </div>
 </div>
