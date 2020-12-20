@@ -15,9 +15,6 @@ export class AuthService {
     if (!token) {
       return false;
     }
-    //var result = !this.jwtHelper.isTokenExpired(token);
-    //var currentTime = Date.now();
-    //if(token.exp)
     return true;
   }
 
