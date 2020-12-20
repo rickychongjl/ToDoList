@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthResponse } from 'src/app/login/models/auth-response.model';
-import { LoginCredentials } from 'src/app/login/models/login-credentials.model';
-import { UserService } from '../shared/services/user-services/user-service.service';
-import { AuthService } from '../shared/services/auth/auth-service.service';
+import { AuthResponse } from 'src/app/account/login/models/auth-response.model';
+import { LoginCredentials } from 'src/app/account/login/models/login-credentials.model';
+import { UserService } from '../../shared/services/user-services/user-service.service';
+import { AuthService } from '../../shared/services/auth/auth-service.service';
 import { Router } from '@angular/router';
 
 @Component({

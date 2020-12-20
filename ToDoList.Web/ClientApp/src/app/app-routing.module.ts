@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule, Router } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './dashboard/home/home.component';
+import { LoginComponent } from './account/login/login.component';
 import { AuthGuard } from './shared/services/auth/auth-guard.service';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpComponent } from './account/sign-up/sign-up.component';
+import { AccountModule } from './account/account.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    AccountModule,
+    DashboardModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule]
