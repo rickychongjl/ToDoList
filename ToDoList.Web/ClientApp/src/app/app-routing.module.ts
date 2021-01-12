@@ -9,7 +9,7 @@ import { AccountModule } from './account/account.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'account', pathMatch: 'full'},
 ];
 
 @NgModule({
